@@ -1,6 +1,7 @@
 library(ggplot2)
 library(data.table)
 library(ggthemes)
+#install.packages("ggthemes")
 
 df <- fread('Economist_Assignment_Data.csv',drop=1)
 
