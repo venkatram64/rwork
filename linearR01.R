@@ -25,7 +25,7 @@ print(num.cols)
 cor.data <- cor(df[, num.cols])
 print(cor.data)
 
-#plot
+#plot, correlation plot
 pl <- corrplot(cor.data, method='color')
 
 #print(pl)
