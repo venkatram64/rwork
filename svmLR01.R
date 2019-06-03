@@ -1,0 +1,32 @@
+library(ISLR)
+#install.packages('e1071')  for support vector machines
+df <- iris
+print(str(df))
+print(head((df)))
+library(e1071)
+#model <- svm(Species ~., data=iris)
+#print(summary(model))
+#Train test split
+library(caTools)
+set.seed(101)
+sample <- sample.split(df$Species, SplitRatio = 0.70)
+train <- subset(df, sample==T)
+test <- subset(df, sample==F)
+model <- svm(Species ~., data=train)
+print(summary(model))
+model.pred <- predict(model, test)
+print("Predictions...")
+print(model.pred)
+print("test predictions...")
+print(table(model.pred,test$Species))
+x <- subset(train, select=-Species)
+y <- train$Species
+tune.results <- tune(svm, train.x = x, train.y = y, kernel="radial", 
+                     ranges=list(cost=c(0.1,1,10), gamma=c(0.5,1,2)))
+print("Summary...")
+print(summary(tune.results))
+tuned.svm <- svm(Species ~ ., data=train, kernel='radial',cost=1.5, gamma=0.1)
+print("tuned svm...")
+print(summary(tuned.svm))
+#help("svm")
+#help("tune")

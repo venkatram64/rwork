@@ -1,0 +1,5 @@
+#install.packages('randomForest')
+library(randomForest)
+print(str(kyphosis))
+rf.model <- randomForest(Kyphosis ~ Age + Number + Start, data=kyphosis)
+print(rf.model)
